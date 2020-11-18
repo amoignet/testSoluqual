@@ -1,1 +1,18 @@
-<p>entite-list works!</p>
+<div *ngFor="let entite of entities; let i=index ">
+
+  <app-entite-item
+    [routerLink]="['/form', i]"
+    [entiteId]="entite.id"
+    [entiteNom]="entite.nom"
+    [entiteFormedIdentite]="entite.formedIdentite"
+    [entiteAdresse]="entite.adresse"
+    [entiteDissolue]="entite.dissolue"
+    [entiteDateDeCreation]="entite.dateDeCreation"
+    [entiteDateDeFinDAnneeFiscale]="entite.dateDeFinDAnneeFiscale"
+    [entiteNatureDesActivites]="entite.natureDesActivites"
+  ></app-entite-item>
+
+</div>
+
+<button class="btn btn-primary" [routerLink]="['/form']" >Créer une nouvelle entité</button>
+

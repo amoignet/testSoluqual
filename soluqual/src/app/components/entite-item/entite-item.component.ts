@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-entite-item',
@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entite-item.component.scss']
 })
 export class EntiteItemComponent implements OnInit {
+
+  @Input() entiteId: number;
+  @Input() entiteNom: string;
+  @Input() entiteFormedIdentite: string;
+  @Input() entiteAdresse: string;
+  @Input() entiteDissolue: boolean;
+  @Input() entiteDateDeCreation: Date;
+  @Input() entiteDateDeFinDAnneeFiscale: Date;
+  @Input() entiteNatureDesActivites: string;
 
   constructor() { }
 
