@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { EntiteItemComponent } from './components/entite-item/entite-item.component';
 import { EntiteListComponent } from './pages/entite-list/entite-list.component';
 import { FormulaireComponent } from './pages/formulaire/formulaire.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +16,8 @@ import { FormulaireComponent } from './pages/formulaire/formulaire.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

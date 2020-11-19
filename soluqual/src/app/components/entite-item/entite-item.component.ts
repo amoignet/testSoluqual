@@ -15,6 +15,7 @@ export class EntiteItemComponent implements OnInit {
   @Input() entiteDateDeCreation: Date;
   @Input() entiteDateDeFinDAnneeFiscale: Date;
   @Input() entiteNatureDesActivites: string;
+  @Input() actionnaires: [];
 
   constructor() { }
 
