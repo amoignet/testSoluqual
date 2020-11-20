@@ -1,4 +1,6 @@
 <div>
+  <h1 *ngIf="isAddMode">Ajouter une entité</h1>
+  <h1 *ngIf="!isAddMode">Modifier une entité</h1>
   <div class="container">
     <div >
       <h3 class="badge badge-primary col-lg-12">Informations Générales</h3>
@@ -10,7 +12,7 @@
 
         <div class="form-group col-md-6">
           <label for="name"> Nom: </label>
-          <input type="text" id="name" class="form-control" formControlName="nom" placeholder="{{entite?.nom}}">
+          <input type="text" id="name" class="form-control" formControlName="nom" >
         </div>
 
         <div class="form-group col-md-6">
@@ -26,7 +28,7 @@
 
         <div class="form-group col-md-6">
           <label for="entities"> Forme d'entités: </label>
-          <input type="text" class="form-control" id="entities"formControlName="formedIdentite" placeholder="{{entite?.formedIdentite}}">
+          <input type="text" class="form-control" id="entities"formControlName="formedIdentite">
         </div>
 
         <div class="form-group col-md-6">
@@ -40,7 +42,7 @@
 
         <div class="form-group col-md-6">
           <label for="address"> Adresse: </label>
-          <textarea type="text" class="form-control" id="address"formControlName="adresse" placeholder="{{entite?.adresse}}"></textarea>
+          <textarea type="text" class="form-control" id="address"formControlName="adresse"></textarea>
         </div>
 
         <div class="form-group col-md-6">
@@ -53,7 +55,7 @@
 
       <div class="form-group">
         <label for="activities" >Nature des activités:</label>
-        <textarea type="text" class="form-control" id="activities" formControlName="natureDesActivites" rows="3" placeholder="{{entite?.natureDesActivites}}"></textarea>
+        <textarea type="text" class="form-control" id="activities" formControlName="natureDesActivites" rows="3"></textarea>
       </div>
 
       <div class="container mt-3">
@@ -62,29 +64,29 @@
               <button type="button" class="btn btn-primary mb-2" (click)="addActionnaire()">Ajouter un actionnaire</button>
             <div class="container border mb-4 p-3" formArrayName="actionnaires"
               *ngFor="let actionnaire of actionnairesControls; let i = index;">
-              <div [formGroupName]="i">
-                <div class="row">
-                  <div class="col-6">
-                      <h4>Actionnaire {{i + 1}}</h4>
+                <div [formGroupName]="i" >
+                  <div class="row">
+                    <div class="col-6">
+                        <h4>Actionnaire {{i + 1}}</h4>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button type="button" class="btn btn-danger btn-sm" (click)="removeActionnaires(i)">Remove</button>
+                    </div>
                   </div>
-                  <div class="col-6 text-right">
-                      <button type="button" class="btn btn-danger btn-sm" (click)="removeActionnaires(i)">Remove</button>
+                  <div class="row" >
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="actionnaireNom">Actionnaire</label>
+                            <input type="text" id="actionnaireNom" class="form-control" formControlName="actionnaireNom" >
+                          </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="pourcentage" >Pourcentage</label>
+                            <input type="number" id="pourcentage" class="form-control" formControlName="pourcentage">
+                          </div>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-6">
-                      <div class="form-group">
-                          <label>Actionnaire</label>
-                          <input type="text" class="form-control" formControlName="actionnaireNom" placeholder="Nom de l'actionnaire"/>
-                        </div>
-                  </div>
-                  <div class="col-6">
-                      <div class="form-group">
-                          <label>Pourcentage</label>
-                          <input type="number" class="form-control" formControlName="pourcentage" placeholder="Pourcentage"/>
-                        </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

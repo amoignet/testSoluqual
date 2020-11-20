@@ -28,6 +28,7 @@ export class EntitiesService {
     const entreprise = ENTITIES.filter((company) => company.id === id);
     return entreprise[0];
   }
+
   addNewEntite(entite: Entite): void {
     console.log('entite:', entite);
     const entiteObject = {
@@ -52,6 +53,15 @@ export class EntitiesService {
     entiteObject.actionnaires = entite.actionnaires;
     console.log('entiteObject', entiteObject);
     ENTITIES.push(entiteObject);
+    this.emitEntitiesSubject();
+  }
+
+  modifEntite(entiteModified: Entite, id): void {
+    const searchItem = this.getById(id);
+    const index = ENTITIES.indexOf(searchItem);
+    if (index !== -1 ) {
+      ENTITIES[index] = entiteModified;
+    }
     this.emitEntitiesSubject();
   }
 

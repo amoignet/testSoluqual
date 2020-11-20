@@ -9,7 +9,15 @@ export const ENTITIES: Entite[] = [
   dissolue : false,
   dateDeCreation : new Date(),
   dateDeFinDAnneeFiscale : new Date(),
-  natureDesActivites : 'Un paragraphe décrivant la nature des activités de l\'entreprise'
+  natureDesActivites : 'Un paragraphe décrivant la nature des activités de l\'entreprise',
+  actionnaires: [{
+    actionnaireNom: 'Antoine Moignet',
+    pourcentage: 50
+  },
+  {
+    actionnaireNom: 'Marine Petit',
+    pourcentage: 40
+  }]
 },
 {
   id : 1,

@@ -22,7 +22,7 @@ export class EntiteListComponent implements OnInit {
 
     this.EntiteSubscription = this.entitiesService.EntiteSubject.subscribe((entities: Entite[]) => {
       this.entities = entities;
-      console.log(this.entities);
+      // console.log(this.entities);
     });
     this.entitiesService.emitEntitiesSubject();
   }

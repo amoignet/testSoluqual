@@ -14,8 +14,10 @@ export class FormulaireComponent implements OnInit {
   entitiesForm: FormGroup;
 
   entite: Entite;
-  currentId: number;
+  currentId: string;
   actionnaires: FormArray;
+  isAddMode: boolean;
+
 
   constructor(private formBuilder: FormBuilder,
               private entitiesService: EntitiesService,
@@ -24,6 +26,15 @@ export class FormulaireComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentId = params.get('id');
+      console.log('ID:', this.currentId);
+      this.isAddMode = !this.currentId;
+      console.log('état:', this.isAddMode);
+
+    });
+
     this.entitiesForm = this.formBuilder.group({
       id: [],
       nom: ['', Validators.required],
@@ -36,28 +47,14 @@ export class FormulaireComponent implements OnInit {
       actionnaires: this.formBuilder.array([ this.createActionnaire() ])
     });
 
-
-
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   this.currentId = parseInt(params.get('id'), 10);
-    //   console.log('ID:', this.currentId);
-      // if (this.currentId) {
-      // this.entite = this.entitiesService.getById(this.currentId);
-      // console.log('Ici je veux mon entité:', this.entite);
-     // this.entitiesForm.patchValue(this.entite);
-      // }
-
-      // if (!id) {
-      //   this.entite = new Entite();
-      // } else {
-        // this.getEntiteInformation(id);
-      // }
-    // });
+    if (!this.isAddMode) {
+      this.entite = this.entitiesService.getById(parseInt(this.currentId, 10));
+      console.log('Ici je veux mon entité:', this.entite);
+      this.entitiesForm.patchValue(this.entite);
+    }
   }
 
-  // getEntiteInformation(id: number): void {
-  //    this.entite = this.entitiesService.getById(id);
-  // }
+
 
   createActionnaire(): FormGroup {
     return this.formBuilder.group({
@@ -83,7 +80,11 @@ export class FormulaireComponent implements OnInit {
     // if (this.currentId) {
       //   this.entitiesForm.value['id'] = this.currentId;
       // console.warn(this.infoGeneral.value);
-      this.entitiesService.addNewEntite(this.entitiesForm.value);
+      if (this.isAddMode) {
+        this.entitiesService.addNewEntite(this.entitiesForm.value);
+      } else {
+        this.entitiesService.modifEntite(this.entitiesForm.value, parseInt(this.currentId, 10))
+      }
       this.router.navigate(['/list']);
     // }
   }
