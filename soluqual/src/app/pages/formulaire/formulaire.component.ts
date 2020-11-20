@@ -15,6 +15,7 @@ export class FormulaireComponent implements OnInit {
 
   entite: Entite;
   currentId: number;
+  actionnaires: FormArray;
 
   constructor(private formBuilder: FormBuilder,
               private entitiesService: EntitiesService,
@@ -32,8 +33,10 @@ export class FormulaireComponent implements OnInit {
       adresse: ['', Validators.required],
       dateDeFinDAnneeFiscale: ['', Validators.required],
       natureDesActivites: ['', Validators.required],
-      actionnaires: this.formBuilder.array([])
+      actionnaires: this.formBuilder.array([ this.createActionnaire() ])
     });
+
+
 
     // this.route.paramMap.subscribe((params: ParamMap) => {
     //   this.currentId = parseInt(params.get('id'), 10);
@@ -56,6 +59,26 @@ export class FormulaireComponent implements OnInit {
   //    this.entite = this.entitiesService.getById(id);
   // }
 
+  createActionnaire(): FormGroup {
+    return this.formBuilder.group({
+      actionnaireNom: '',
+      pourcentage: ''
+    });
+  }
+
+  addActionnaire(): void {
+    this.actionnaires = this.entitiesForm.get('actionnaires') as FormArray;
+    this.actionnaires.push(this.createActionnaire());
+  }
+
+  get actionnairesControls(): void {
+    return this.entitiesForm.get('actionnaires')['controls'];
+  }
+
+  removeActionnaires(i: number): void {
+    this.actionnaires.removeAt(i);
+  }
+
   onSubmit(): void {
     // if (this.currentId) {
       //   this.entitiesForm.value['id'] = this.currentId;
@@ -63,15 +86,6 @@ export class FormulaireComponent implements OnInit {
       this.entitiesService.addNewEntite(this.entitiesForm.value);
       this.router.navigate(['/list']);
     // }
-  }
-
-  getActionnaires(): any {
-    return this.entitiesForm.get('actionnaires') as FormArray;
-  }
-
-  addActionnaire(): void {
-    const newActionnaireControl = this.formBuilder.control('', Validators.required);
-    this.getActionnaires().push(newActionnaireControl);
   }
 
 }

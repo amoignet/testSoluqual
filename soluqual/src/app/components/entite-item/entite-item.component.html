@@ -1,5 +1,5 @@
+
 <div>
-  <p>{{entiteId}}</p>
   <p>{{entiteNom}}</p>
   <p>{{entiteFormedIdentite}}</p>
   <p>{{entiteAdresse}}</p>
@@ -7,7 +7,11 @@
   <p>{{entiteDateDeCreation}}</p>
   <p>{{entiteDateDeFinDAnneeFiscale}}</p>
   <p>{{entiteNatureDesActivites}}</p>
-  <p>{{actionnaires}}</p>
+  <div *ngFor="let actionnaire of actionnaires; let i=index">
+    <p>{{actionnaire.actionnaireNom}}</p>
+    <p>{{actionnaire.pourcentage}}</p>
+  </div>
+
 </div>
 
 
