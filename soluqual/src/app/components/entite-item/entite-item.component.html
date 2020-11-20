@@ -1,15 +1,20 @@
 
-<div>
+<div class="container , card" >
+  <h4>Nom</h4>
   <p>{{entiteNom}}</p>
-  <p>{{entiteFormedIdentite}}</p>
+  <h4>Adresse</h4>
   <p>{{entiteAdresse}}</p>
-  <p>{{entiteDissolue}}</p>
-  <p>{{entiteDateDeCreation}}</p>
-  <p>{{entiteDateDeFinDAnneeFiscale}}</p>
-  <p>{{entiteNatureDesActivites}}</p>
-  <div *ngFor="let actionnaire of actionnaires; let i=index">
-    <p>{{actionnaire.actionnaireNom}}</p>
-    <p>{{actionnaire.pourcentage}}</p>
+  <p>Dissolue: {{entiteDissolue}}</p>
+  <p>Forme de l'entité: {{entiteFormedIdentite}}</p>
+  <p>Date de création: {{entiteDateDeCreation | date }}</p>
+  <p>Date de fin de l'année fiscale: {{entiteDateDeFinDAnneeFiscale | date}}</p>
+  <p>Activité: {{entiteNatureDesActivites}}</p>
+  <div class="row">
+    <div *ngFor="let actionnaire of actionnaires; let i=index" class="col-6, card" id="actionnaire">
+      <h5>Actionnaires</h5>
+      <p>Nom de l'actionnaire: {{actionnaire.actionnaireNom}}</p>
+      <p>{{actionnaire.pourcentage}}%</p>
+    </div>
   </div>
 
 </div>
